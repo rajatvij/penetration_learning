@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<oval_definitions xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows windows-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd">
+<generator>
+  <oval:product_name>HomeWork</oval:product_name> 
+  <oval:schema_version>5.10</oval:schema_version> 
+  <oval:timestamp>2014-02-14T15:37:22.000-05:00</oval:timestamp> 
+</generator>
+
+  <definitions>
+    <definition id="oval:NoLmHash.WeidongXu:def:1" version="1" class="compliance">
+      <metadata>
+        <title>NoLmHash</title>
+        <description>
+          Check that Windows is not storing LM hashes of user passwords
+        </description>
+      </metadata>
+      <criteria>
+        <criterion test_ref="oval:NoLmHash.WeidongXu:tst:1" comment="the value of the key should equal to 1"/>
+      </criteria>
+    </definition>
+
+    <definition id="oval:RegeditVersion.WeidongXu:def:2" version="1" class="compliance">
+      <metadata>
+        <title>RegeditVersion</title>
+        <description>
+          Check that the version of regedit.exe is greater than version 5.0!
+        </description>
+      </metadata>
+      <criteria>
+        <criterion test_ref="oval:RegeditVersion.WeidongXu:tst:2" comment="the value of the key greater than 5.0"/>
+      </criteria>
+    </definition>
+
+    <definition id="oval:Dhcp.WeidongXu:def:3" version="1" class="compliance">
+      <metadata>
+        <title>DHCP Auto</title>
+        <description>
+          Check that the DHCP service is set to start value ‘automatic’!
+        </description>
+      </metadata>
+    <criteria>
+    <criterion test_ref="oval:Dhcp.WeidongXu:tst:3" comment="the value of the registry key equals 2"/>
+     </criteria>
+    </definition>
+  </definitions>
+
+  <tests>
+    <registry_test comment="NoLmHash" version="1" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:NoLmHash.WeidongXu:tst:1" check="all">
+        <object object_ref="oval:NoLmHash.WeidongXu:obj:1"/>
+        <state state_ref="oval:NoLmHash.WeidongXu:ste:1"/>
+    </registry_test>
+
+    <registry_test comment="RegeditVersion" version="1" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:RegeditVersion.WeidongXu:tst:2" check="all">
+        <object object_ref="oval:RegeditVersion.WeidongXu:obj:2"/>
+        <state state_ref="oval:RegeditVersion.WeidongXu:ste:2"/>
+    </registry_test>
+
+    <registry_test comment="Dhcp" version="1" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:Dhcp.WeidongXu:tst:3" check="all">
+        <object object_ref="oval:Dhcp.WeidongXu:obj:3"/>
+        <state state_ref="oval:Dhcp.WeidongXu:ste:3"/>
+    </registry_test>
+  </tests>
+
+  <objects>
+     <registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:NoLmHash.WeidongXu:obj:1" version="1" comment="NoLmHash">
+        <hive>HKEY_LOCAL_MACHINE</hive>
+        <key>SYSTEM\CurrentControlSet\Control\Lsa</key>
+        <name>NoLmHash</name>
+     </registry_object>
+
+     <file_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:RegeditVersion.WeidongXu:obj:2" version="1" comment="RegeditVersion">
+       <path>c:\windows</path>
+       <filename>regedit.exe</filename>
+     </file_object>
+
+     <registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:Dhcp.WeidongXu:obj:3" version="1" comment="Dhcp">
+        <hive>HKEY_LOCAL_MACHINE</hive>
+        <key>SYSTEM\CurrentControlSet\services\Dhcp</key>
+        <name>Start</name>
+     </registry_object>
+  </objects>
+
+
+  <states>
+    <registry_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:NoLmHash.WeidongXu:ste:1" version="1" comment="NoLmHash">
+       <value>1</value>
+    </registry_state>
+
+    <file_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:RegeditVersion.WeidongXu:ste:2" version="1" comment="RegeditVersion">
+       <version datatype="version" operation="greater than">5.0</version> 
+    </file_state>
+
+
+    <registry_state xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" id="oval:Dhcp.WeidongXu:ste:3" version="1" comment="Dhcp">
+       <value>2</value>
+    </registry_state>
+  </states>
+
+  </oval_definitions>
